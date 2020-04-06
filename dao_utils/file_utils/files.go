@@ -13,6 +13,11 @@ import (
 	Returns the configuration object.
 */
 func LoadConfiguration(configFilePath string) interface{} {
+	// Check for errors
+	if configFilePath == "" {
+		log.Fatal("Please provide the path to config file.")
+	}
+
 	// Initialize
 	var configuration interface{}
 

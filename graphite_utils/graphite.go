@@ -11,5 +11,4 @@ func InitializeGraphite(config graphite.GraphiteConfig) {
 	if err != nil {
 		log.Fatal("Unable to initialize graphite_utils.")
 	}
-	defer graphite.Stop()
 }

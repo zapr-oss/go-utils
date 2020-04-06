@@ -1,6 +1,8 @@
 package mysql
 
-import "database/sql"
+import (
+	"database/sql"
+)
 
 type Entity struct {
 	DB         *sql.DB
