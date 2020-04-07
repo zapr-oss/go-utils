@@ -5,6 +5,7 @@ import (
 	graphite "bitbucket.org/zapr/graphite_go"
 	"database/sql"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"log"
 )
 

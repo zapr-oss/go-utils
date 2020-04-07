@@ -1,2 +1,4 @@
 bitbucket.org/zapr/graphite_go v1.0.0 h1:qEi4QHi+g1Jq+QS8VIxuOZLrcKQeqXFDF+uok3/6UGQ=
 bitbucket.org/zapr/graphite_go v1.0.0/go.mod h1:PmFRiXjJ2x5TsoMqympIGUDQauw3+Awjn+7UpzFj2vU=
+github.com/go-sql-driver/mysql v1.5.0 h1:ozyZYNQW3x3HtqT1jira07DN2PArx2v7/mN66gGcHOs=
+github.com/go-sql-driver/mysql v1.5.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LBy8hT2VhHyBg=
