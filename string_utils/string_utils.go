@@ -41,3 +41,9 @@ func RemoveWords(str string, wordsToRemove []string) string {
 func CaseInsensitiveStringEquals(str1, str2 string) bool {
 	return strings.ToLower(str1) == strings.ToLower(str2)
 }
+
+func CaseInsensitiveContains(str1, str2 string) bool {
+	lowerStr1 := strings.ToLower(str1)
+	lowerStr2 := strings.ToLower(str2)
+	return strings.Contains(lowerStr1, lowerStr2)
+}

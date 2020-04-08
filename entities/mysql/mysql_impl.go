@@ -1,9 +1,9 @@
 package mysql
 
 import (
+	"bitbucket.org/zapr/go-utils/string_utils"
 	"database/sql"
 	"log"
-	"strings"
 	"time"
 )
 
@@ -23,7 +23,7 @@ func (entity *Entity) executeQueryWithRetry(tx *sql.Tx, query string, iterationC
 	}
 
 	if err != nil {
-		if strings.Contains(err.Error(), "Deadlock") {
+		if string_utils.CaseInsensitiveContains(err.Error(), "deadlock") {
 			if iterationCount < entity.RetryCount { // Try again after a delay
 				time.Sleep(10 * time.Second)
 				return entity.executeQueryWithRetry(tx, query, iterationCount+1, args...)
