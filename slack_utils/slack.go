@@ -23,11 +23,11 @@ func Post(webHookUrl, text string, alert bool) {
 
 	structBytes, err := json.Marshal(data)
 	if err != nil {
-		log.Println("Error in posting message to slack")
+		log.Println("Error in posting message to slack", err)
 	}
 
 	res, err := http.Post(webHookUrl, "application/json", bytes.NewReader(structBytes))
 	if err != nil || res.StatusCode != 200 {
-		log.Println("Error in posting message to slack")
+		log.Println("Error in posting message to slack", err)
 	}
 }
