@@ -1,8 +1,8 @@
 package graphite_utils
 
 import (
-	"log"
 	graphite "bitbucket.org/zapr/graphite_go"
+	"log"
 )
 
 func InitializeGraphite(config graphite.GraphiteConfig) {

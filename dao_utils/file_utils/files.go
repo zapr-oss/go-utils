@@ -3,6 +3,7 @@ package file_utils
 import (
 	"bitbucket.org/zapr/go-utils/common_utils"
 	"encoding/json"
+	"github.com/mitchellh/mapstructure"
 	"log"
 	"os"
 )
@@ -12,7 +13,7 @@ import (
 	On error, the program will exit.
 	Returns the configuration object.
 */
-func LoadConfiguration(configFilePath string) interface{} {
+func LoadConfiguration(configFilePath string, configObject interface{}) {
 	// Check for errors
 	if configFilePath == "" {
 		log.Fatal("Please provide the path to config file.")
@@ -24,7 +25,7 @@ func LoadConfiguration(configFilePath string) interface{} {
 	// Read config file
 	configFile, err := os.Open(configFilePath)
 	if err != nil {
-		log.Fatal("Error while opening configuration file:", err)
+		log.Fatalln("Error while opening configuration file:", err)
 	}
 	defer common_utils.CloseStream(configFile)
 
@@ -32,8 +33,13 @@ func LoadConfiguration(configFilePath string) interface{} {
 	jsonParser := json.NewDecoder(configFile)
 	err = jsonParser.Decode(&configuration)
 	if err != nil {
-		log.Fatal("Error while parsing the configuration file:", err)
+		log.Fatalln("Error while parsing the configuration file:", err)
 	}
 
-	return configuration
+	// Parse generic object to desired object
+	err = mapstructure.Decode(configuration, configObject)
+	if err != nil {
+		errorMsg := "Error while mapping config data onto provided config object. " + url
+		log.Fatalln(errorMsg, err)
+	}
 }
