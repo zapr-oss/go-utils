@@ -15,7 +15,7 @@ Returns pointers to the MongoDB object, and the open session to it.
 
 (Mongo) -> (*MongoDatabase, *Session)
 */
-func Connect(mongoConfig mongo.Mongo) (*mongo.Entity, error) {
+func Connect(mongoConfig mongo.Config) (*mongo.Entity, error) {
 	mongoUrl := fmt.Sprintf("%s:%d", mongoConfig.Host, mongoConfig.Port)
 	if mongoConfig.UserName != "" {
 		mongoUrl = fmt.Sprintf("mongodb://%s:%s@%s/%s", mongoConfig.UserName,
