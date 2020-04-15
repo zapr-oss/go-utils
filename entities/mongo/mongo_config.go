@@ -1,7 +1,7 @@
 package mongo
 
-// Mongo contains details of MongoDB
-type Mongo struct {
+// Config contains details of MongoDB
+type Config struct {
 	Host       string `json:"host"`
 	Port       int    `json:"port"`
 	Database   string `json:"database"`
