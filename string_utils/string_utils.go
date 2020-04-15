@@ -8,17 +8,21 @@ import (
 	"strings"
 )
 
-func GetStructAsString(obj interface{}) interface{} {
+func GetStructAsString(obj interface{}) string {
 	objBytes, err := json.Marshal(obj)
 	if err != nil {
 		log.Println("Error in converting object to string.", err)
-		return nil
+		return ""
 	}
 	if string(objBytes) == "null" {
-		return nil
+		return ""
 	}
 
 	return string(objBytes)
+}
+
+func GetStructAsInterface(obj interface{}) interface{} {
+	return GetStructAsString(obj)
 }
 
 func RemoveNonAlphaNumeric(str string) string {
