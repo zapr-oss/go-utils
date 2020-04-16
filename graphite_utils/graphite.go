@@ -1,14 +1,16 @@
 package graphite_utils
 
 import (
-	"log"
 	graphite "bitbucket.org/zapr/graphite_go"
+	"log"
 )
 
-func InitializeGraphite(config graphite.GraphiteConfig) {
+func InitializeGraphite(config graphite.GraphiteConfig) error {
 	graphite.InitDefaultGraphite(config)
 	err := graphite.Start()
 	if err != nil {
-		log.Fatal("Unable to initialize graphite_utils.", err)
+		log.Println("Unable to initialize graphite_utils.", err)
+		return err
 	}
+	return nil
 }
