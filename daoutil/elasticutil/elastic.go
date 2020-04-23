@@ -1,4 +1,4 @@
-package elastic_utils
+package elasticutil
 
 import (
 	"bitbucket.org/zapr/go-utils/entities/elastic_entity"

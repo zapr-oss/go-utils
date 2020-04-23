@@ -1,4 +1,4 @@
-package slack_utils
+package slackutil
 
 import (
 	"bytes"
@@ -23,7 +23,7 @@ func Post(webHookUrl, text string, alert bool) {
 
 	structBytes, err := json.Marshal(data)
 	if err != nil {
-		log.Println("Error in posting message to slack", err)
+		log.Println("error in posting message to slack", err)
 	}
 
 	res, err := http.Post(webHookUrl, "application/json", bytes.NewReader(structBytes))
