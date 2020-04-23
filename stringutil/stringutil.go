@@ -27,6 +27,14 @@ func GetStructAsString(obj interface{}) string {
 	return string(objBytes)
 }
 
+func GetStringAsInterface(str string) interface{} {
+	if str == "" {
+		return nil
+	}
+
+	return str
+}
+
 func GetStructAsInterface(obj interface{}) interface{} {
 
 	if obj == nil {
