@@ -1,4 +1,4 @@
-package mongo
+package mongoconfig
 
 // Config contains details of MongoDB
 type Config struct {

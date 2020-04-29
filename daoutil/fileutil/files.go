@@ -1,4 +1,4 @@
-package file_utils
+package fileutil
 
 import (
 	"bitbucket.org/zapr/go-utils/common_utils"

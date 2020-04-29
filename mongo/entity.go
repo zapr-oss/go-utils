@@ -1,12 +1,17 @@
-package mongo_utils
+package mongo
 
 import (
-	"bitbucket.org/zapr/go-utils/entities/mongo"
+	"bitbucket.org/zapr/go-utils/mongo/config"
 	"fmt"
 	"gopkg.in/mgo.v2"
 	"log"
 	"net/url"
 )
+
+type Entity struct {
+	DB      *mgo.Database
+	Session *mgo.Session
+}
 
 /*
 InitMongoDB creates a connection to MongoDB using the provided mongo config.
@@ -15,7 +20,7 @@ Returns pointers to the MongoDB object, and the open session to it.
 
 (Mongo) -> (*MongoDatabase, *Session)
 */
-func Connect(mongoConfig mongo.Config) (*mongo.Entity, error) {
+func Connect(mongoConfig mongoconfig.Config) (*Entity, error) {
 	mongoUrl := fmt.Sprintf("%s:%d", mongoConfig.Host, mongoConfig.Port)
 	if mongoConfig.UserName != "" {
 		mongoUrl = fmt.Sprintf("mongodb://%s:%s@%s/%s", mongoConfig.UserName,
@@ -29,8 +34,13 @@ func Connect(mongoConfig mongo.Config) (*mongo.Entity, error) {
 	}
 
 	database := session.DB(mongoConfig.Database)
-	return &mongo.Entity{
-		Database: database,
-		Session:  session,
+
+	return &Entity{
+		DB:      database,
+		Session: session,
 	}, nil
+}
+
+func (e *Entity) Close() {
+	e.Session.Close()
 }
