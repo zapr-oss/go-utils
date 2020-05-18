@@ -46,6 +46,9 @@ func RollbackTransaction(tx *sql.Tx) error {
 	return nil
 }
 
+/*
+Used to create an insert query with multiple parameters.
+*/
 func CreateMultipleQuery(query, bindVar string, noOfParams, argLen int) (string, error) {
 
 	if !strings.Contains(query, bindVar) {

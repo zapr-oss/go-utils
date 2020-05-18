@@ -32,6 +32,14 @@ type Entity struct {
 	RetryCount int
 }
 
+/*
+This function is used to insert multiple values in one query.
+@params:
+	query: a query containing bindVar string
+	bindVar: its basically used to create a query, eg. `Insert INTO abc (column1, column2, column3) VALUES $$`. `$$` is the bindVar here
+	noOfParams: 3 in the above example. Its the number of columns to insert
+	args: list of arguments for the query.
+ */
 func (e *Entity) InsertMultiple(query string, bindVar string, noOfParams int, args ...interface{}) (sql.Result, error) {
 
 	query, err := mysqlutil.CreateMultipleQuery(query, bindVar, noOfParams, len(args))

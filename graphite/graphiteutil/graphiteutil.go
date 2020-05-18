@@ -1,7 +1,7 @@
 package graphiteutil
 
 import (
-	graphite "bitbucket.org/zapr/graphite_go"
+	"bitbucket.org/zapr/go-utils/graphite"
 	"log"
 )
 
