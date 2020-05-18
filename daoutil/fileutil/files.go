@@ -1,7 +1,7 @@
 package fileutil
 
 import (
-	"bitbucket.org/zapr/go-utils/common_utils"
+	"bitbucket.org/zapr/go-utils/common"
 	"encoding/json"
 	"errors"
 	"github.com/mitchellh/mapstructure"
@@ -30,7 +30,7 @@ func LoadConfiguration(configFilePath string, configObject interface{}) error {
 		log.Println("Error while opening configuration file:", err)
 		return err
 	}
-	defer common_utils.CloseStream(configFile)
+	defer commonutil.CloseStream(configFile)
 
 	// Parse config file
 	jsonParser := json.NewDecoder(configFile)
