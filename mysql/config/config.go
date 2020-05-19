@@ -1,4 +1,4 @@
-package mysql
+package mysqlconfig
 
 type Config struct {
 	User       string `json:"user"`
