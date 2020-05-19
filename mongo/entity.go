@@ -1,10 +1,10 @@
 package mongo
 
 import (
-	"bitbucket.org/zapr/go-utils/mongo/config"
 	"fmt"
-	"gopkg.in/mgo.v2"
 	"log"
+	"github.com/zapr-oss/go-utils/mongo/config"
+	"gopkg.in/mgo.v2"
 	"net/url"
 )
 
@@ -13,13 +13,9 @@ type Entity struct {
 	Session *mgo.Session
 }
 
-/*
-InitMongoDB creates a connection to MongoDB using the provided mongo config.
-
-Returns pointers to the MongoDB object, and the open session to it.
-
-(Mongo) -> (*MongoDatabase, *Session)
-*/
+//InitMongoDB creates a connection to MongoDB using the provided mongo config.
+//Returns pointers to the MongoDB object, and the open session to it.
+//(Mongo) -> (*MongoDatabase, *Session)
 func Connect(mongoConfig mongoconfig.Config) (*Entity, error) {
 	mongoUrl := fmt.Sprintf("%s:%d", mongoConfig.Host, mongoConfig.Port)
 	if mongoConfig.UserName != "" {

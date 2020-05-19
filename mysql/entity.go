@@ -1,13 +1,13 @@
 package mysql
 
 import (
-	"bitbucket.org/zapr/go-utils/mysql/config"
-	"bitbucket.org/zapr/go-utils/mysql/mysqlutil"
-	"bitbucket.org/zapr/go-utils/stringutil"
-	"bitbucket.org/zapr/graphite_go"
 	"database/sql"
-	"fmt"
 	"log"
+	"github.com/zapr-oss/go-utils/graphite"
+	"github.com/zapr-oss/go-utils/mysql/config"
+	"github.com/zapr-oss/go-utils/mysql/mysqlutil"
+	"github.com/zapr-oss/go-utils/stringutil"
+	"fmt"
 	"time"
 )
 
@@ -32,14 +32,14 @@ type Entity struct {
 	RetryCount int
 }
 
+// This function is used to insert multiple values in one query.
 /*
-This function is used to insert multiple values in one query.
 @params:
 	query: a query containing bindVar string
 	bindVar: its basically used to create a query, eg. `Insert INTO abc (column1, column2, column3) VALUES $$`. `$$` is the bindVar here
 	noOfParams: 3 in the above example. Its the number of columns to insert
 	args: list of arguments for the query.
- */
+*/
 func (e *Entity) InsertMultiple(query string, bindVar string, noOfParams int, args ...interface{}) (sql.Result, error) {
 
 	query, err := mysqlutil.CreateMultipleQuery(query, bindVar, noOfParams, len(args))

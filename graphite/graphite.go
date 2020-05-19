@@ -1,6 +1,5 @@
 // Package graphite implements a graphite client with aggregation of metrics in a short period of time and sending the result to graphite.
 // The package was written for cases when an application is running on thousands of instances and each of the instances generates hundreds of thousands of events per second.
-//
 package graphite
 
 import (
@@ -31,10 +30,13 @@ func InitDefaultGraphite(graphiteConfig GraphiteConfig) {
 	defaultGraphite = dG
 }
 
+// Start creates a goroutine, which sends the aggregated metrics to graphite.
+// Start should be called once when the application is initialized as soon as all metrics are registered with functions Register*
 func Start() error {
 	return defaultGraphite.Start()
 }
 
+// Stop graphite go-routtine
 func Stop() error {
 	return defaultGraphite.Stop()
 }
@@ -227,6 +229,6 @@ type GraphiteConfig struct {
 	Port               uint16 `json:"port"`
 	Prefix             string `json:"prefix"`
 	Environment        string `json:"environment"`
-	FlushIntervalInSec int64  `json:"flushIntervalInSec"`
+	FlushIntervalInSec int64  `json:"flushIntervalInSec"` // interval to send metrics to graphite server.
 	Disabled           bool   `json:"disabled"`
 }

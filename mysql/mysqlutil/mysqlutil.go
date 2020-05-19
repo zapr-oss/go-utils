@@ -1,11 +1,11 @@
 package mysqlutil
 
 import (
-	"bitbucket.org/zapr/go-utils/mysql/config"
-	"bitbucket.org/zapr/graphite_go"
 	"database/sql"
 	"fmt"
 	"log"
+	"github.com/zapr-oss/go-utils/graphite"
+	"github.com/zapr-oss/go-utils/mysql/config"
 	"math"
 	"strings"
 )
@@ -46,9 +46,8 @@ func RollbackTransaction(tx *sql.Tx) error {
 	return nil
 }
 
-/*
-Used to create an insert query with multiple parameters.
-*/
+
+//Used to create an insert query with multiple parameters.
 func CreateMultipleQuery(query, bindVar string, noOfParams, argLen int) (string, error) {
 
 	if !strings.Contains(query, bindVar) {

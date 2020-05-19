@@ -11,13 +11,13 @@ It contains basic utility functions for strings, mysql, mongo, elastic-search, f
 package main
 
 import (
-	"bitbucket.org/zapr/go-utils/mysql"
-	"bitbucket.org/zapr/go-utils/mysql/config"
+	"github.com/zapr-oss/go-utils/mysql"
+	"github.com/zapr-oss/go-utils/mysql/config"
 )
 
 func main() {
 	mConfig := mysqlconfig.Config{
-		Host: "102.0.0.1",
+		Host: "127.0.0.1",
 		User: "username",
 		Password:"password",
 		Database:"database",
@@ -52,17 +52,21 @@ func main() {
 package main
 
 import (
-	"bitbucket.org/zapr/go-utils/mongo"
-	"bitbucket.org/zapr/go-utils/mongo/config"
-	"fmt"
+	"github.com/zapr-oss/go-utils/mongo"
+	"github.com/zapr-oss/go-utils/mongo/config"
+	"log"
 	"gopkg.in/mgo.v2/bson"
 )
 
 func main() {
 
 	config := mongoconfig.Config{
-	    //provide config
-	}
+        Host: "127.0.0.1",
+        UserName: "username",
+        Password:"password",
+        Database:"database",
+        Port:3306,
+    }
 
 	mongoE, err := mongo.Connect(config)
 	if err != nil {
@@ -74,32 +78,58 @@ func main() {
 
 	columnCount, _ := col.Find(bson.M{}).Count()
 
-	fmt.Println(columnCount)
+	log.Println(columnCount)
 }
 
 ```
 
     3. GRAPHITE Package
 ```go
-    package main
-    
-    import (
-    	"bitbucket.org/zapr/go-utils/graphite/graphiteutil"
-    	"bitbucket.org/zapr/go-utils/graphite"
-    )
-    
-    func main() {
-    
-    	graphiteConfig := graphite.GraphiteConfig{}
-    
-    	err := graphiteutil.InitializeGraphite(graphiteConfig)
-    
-    	if err != nil {
-    	//	Handle error
-    	}
-    
-    	graphite.GetCounter("counter_name").Inc()
+package main
+
+import (
+    "github.com/zapr-oss/go-utils/graphite/graphiteutil"
+    "github.com/zapr-oss/go-utils/graphite"
+)
+
+func main() {
+
+    graphiteConfig := graphite.GraphiteConfig{
+       Host: "127.0.0.1",
+       Port:3306,
+       Prefix: "metric_prefix",
+       Environment: "prod",
+       FlushIntervalInSec: 1, // interval to send metrics to graphite server.
+       Disabled: false,
+   }
+
+    err := graphiteutil.InitializeGraphite(graphiteConfig)
+
+    if err != nil {
+    //	Handle error
     }
+
+    graphite.GetCounter("counter_name").Inc()
+}
+
+```
+
+    4. ElasticSearch Package
+```go
+package main
+
+import (
+	"github.com/zapr-oss/go-utils/elasticsearch/config"
+    "github.com/zapr-oss/go-utils/elasticsearch"
+)
+func main() {
+	elasticConfig := elasticconfig.Config{Addresses: []string{"http://127.0.0.1:9200", "http://192.168.0.1:9200"}}
+	client, err := elasticsearch.Connect(elasticConfig)
+	
+	if err != nil {
+	// Handle error
+	}
+}
 
 ```
 

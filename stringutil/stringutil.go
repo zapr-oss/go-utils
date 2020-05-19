@@ -2,13 +2,14 @@ package stringutil
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
+	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
 )
 
+// Converts a go struct to string.
 func GetStructAsString(obj interface{}) string {
 	if obj == nil {
 		return ""
@@ -27,6 +28,7 @@ func GetStructAsString(obj interface{}) string {
 	return string(objBytes)
 }
 
+// TypeCast string as interface.
 func GetStringAsInterface(str string) interface{} {
 	if str == "" {
 		return nil
@@ -35,6 +37,7 @@ func GetStringAsInterface(str string) interface{} {
 	return str
 }
 
+// TypeCast struct as interface.
 func GetStructAsInterface(obj interface{}) interface{} {
 
 	if obj == nil {
@@ -55,6 +58,7 @@ func GetStructAsInterface(obj interface{}) interface{} {
 	return string(objBytes)
 }
 
+// Removes all non-alphanumeric characters.
 func RemoveNonAlphaNumeric(str string) string {
 	reg, err := regexp.Compile("[^a-zA-Z0-9 ]+")
 	if err != nil {
@@ -64,6 +68,7 @@ func RemoveNonAlphaNumeric(str string) string {
 	return reg.ReplaceAllString(str, "")
 }
 
+// Removes given words from the provided text.
 func RemoveWords(str string, wordsToRemove []string) string {
 	for _, word := range wordsToRemove {
 		str = strings.Replace(str, word, "", -1)
@@ -82,10 +87,12 @@ func CaseInsensitiveContains(str1, str2 string) bool {
 	return strings.Contains(lowerStr1, lowerStr2)
 }
 
+// Get pointer to string.
 func GetStringPtr(str string) *string {
 	return &str
 }
 
+// Converts string to int pointer.
 func GetStringAsIntPtr(str string) *int {
 	yr, err := strconv.Atoi(str)
 

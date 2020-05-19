@@ -1,19 +1,16 @@
 package fileutil
 
 import (
-	"bitbucket.org/zapr/go-utils/common"
 	"encoding/json"
 	"errors"
 	"github.com/mitchellh/mapstructure"
+	"github.com/zapr-oss/go-utils/common"
 	"log"
 	"os"
 )
 
-/*
-	Loads the config file into an object.
-	On error, the program will exit.
-	Returns the configuration object.
-*/
+
+// Loads the config file into an object. On error, the program will exit. Returns the configuration object.s
 func LoadConfiguration(configFilePath string, configObject interface{}) error {
 	// Check for errors
 	if configFilePath == "" {
